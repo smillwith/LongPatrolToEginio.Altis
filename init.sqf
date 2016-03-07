@@ -1,4 +1,27 @@
-﻿//execVM = "funcs.sqf";
+﻿/*
+Notes:
+
+Add an option to 'go dark'?
+Make sure the vehicles that are there are out of gas
+Confirm that you can use High Command if you need to (or remove it)
+Figure out if you are going to have tons of enemies or not
+And if they are going to be dumb or smart or what
+Adjust their 'Behavior' to be 'Combat' and see if they shoot at you sooner
+Do we want to randomize emenies?
+Coop?
+Change the time
+Can the high command indicators be turned off?
+Can I reload ammo for the mortar?
+
+Coop Options
+
+Vehicles?
+Go Dark?
+Time?
+Go solo?
+
+*/
+
 
 //Begin ALL Units (all sides)
 {
@@ -14,19 +37,39 @@ forEach allUnits;
 
 //Begin 'Assault Group' Only
 {
+  //Filter out Costa, since he's different
   if (format ["%1", _x] != "b_costa") then {
-    _x addHeadgear "H_HelmetSpecB_paint2";
-    _x addGoggles "G_Combat";
+    //_x addHeadgear "H_HelmetSpecB_paint1"; //grass
+    //_x addHeadgear "H_HelmetSpecB_paint2"; //original helmet, desert
+    _x addHeadgear "H_HelmetSpecB_snakeskin"; //enhanced, snakeskin
+    //_x addHeadgear "H_HelmetB_light_desert";  //light, desert
+    //_x addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+    _x addGoggles "G_Shades_Black";
+
+    //Task force Aegis patch
     [_x,"TFAegis"] call bis_fnc_setUnitInsignia;
   
+    //Force specific optics for every one
     if (((primaryWeaponItems _x) select 2) == "optic_Holosight" || primaryWeaponItems _x select 2 == "optic_Aco" || primaryWeaponItems _x select 2 == "") then {
       _x removePrimaryWeaponItem "optic_Holosight";
       _x addPrimaryWeaponItem "optic_Arco";
     };
 
+    //Autogunners get special optics
     if (format ["%1", _x] == "b_jackson" || format ["%1", _x] == "b_campbell") then {
       _x addPrimaryWeaponItem "optic_Hamr";
     };
+
+    //Add a backpack to those who don't have one
+    if (backpack _x == "") then {
+      //_x addBackpack "B_AssaultPack_rgr";
+      _x addBackpack "B_AssaultPack_mcamo";
+    };
+  } else
+  {
+    //Costa only
+    _x addGoggles "H_Bandanna_sgg";
+    _x addPrimaryWeaponItem "optic_Aco";
   };
 
   _x addPrimaryWeaponItem "acc_flashlight";
@@ -38,7 +81,27 @@ forEach units assaultgroup;
 
 //For specific units
 
-//Leader
+//Roster
+//1 - Armstrong - Squad Leader
+//2 - Jackson - Autorifleman
+//3 - Campbell - Autorifleman
+//4 - Adams - Repair spc
+//5 - Bennett - Medic
+//6 - Larkin - Medic
+//7 - Martinez - Sharpshooter
+//8 - Levine - Ammo bearer
+//9 - Taylor - Rifleman
+//10 - McKendrick - Engineer
+//11 - Dixon - Explosive Specialist
+//12 - Franklin - Asst Mortarman
+//13 - Givens - Mortarman
+//14 - Lopez - AT Soldier
+//15 - Hawkins - AT Soldier
+//16 - Costa - Light Rifleman / Driver
+//17 - Everett - Medic
+
+//-----------------------------------
+//1 - Armstrong - Squad Leader
 b_armstrong addGoggles "G_Tactical_Clear";
 b_armstrong addItemToVest "Chemlight_yellow";
 b_armstrong addItemToVest "Chemlight_yellow";
@@ -47,55 +110,46 @@ b_armstrong addItemToVest "Chemlight_blue";
 b_armstrong addItemToVest "Chemlight_blue";
 b_armstrong addItemToVest "Chemlight_blue";
 
+//-----------------------------------
+//2 - Jackson - Autorifleman
+//b_jackson addHeadgear "H_HelmetB_black";
+b_jackson addGoggles "G_Shades_Red";
 
-//Medic 1
-b_everett addItemToBackpack "Chemlight_red";
-b_everett addItemToBackpack "Chemlight_red";
-b_everett addItemToBackpack "Chemlight_red";
-b_everett addItemToBackpack "Chemlight_red";
-b_everett addItemToBackpack "Chemlight_red";
+//-----------------------------------
+//3 - Campbell - Autorifleman
 
-//Medic 2
+//-----------------------------------
+//4 - Adams - Repair spc
+b_adams addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+clearAllItemsFromBackpack b_adams;
+removeBackpack b_adams;
+b_adams addBackpack "B_AssaultPack_blk";
+b_adams addItemToBackpack "ToolKit";
+b_adams addGoggles "G_Lowprofile";
+
+//-----------------------------------
+//5 - Bennett - Medic
+b_bennett addItemToBackpack "Chemlight_red";
+b_bennett addItemToBackpack "Chemlight_red";
+b_bennett addItemToBackpack "Chemlight_red";
+b_bennett addItemToBackpack "Chemlight_red";
+b_bennett addItemToBackpack "Chemlight_red";
+
+//-----------------------------------
+//6 - Larkin - Medic
 b_larkin addItemToBackpack "Chemlight_red";
 b_larkin addItemToBackpack "Chemlight_red";
 b_larkin addItemToBackpack "Chemlight_red";
 b_larkin addItemToBackpack "Chemlight_red";
 b_larkin addItemToBackpack "Chemlight_red";
 
-//Dixon
-b_dixon addItemToBackpack "Chemlight_red";
-b_dixon addItemToBackpack "Chemlight_red";
-b_dixon addItemToBackpack "Chemlight_red";
-b_dixon addItemToBackpack "Chemlight_red";
-b_dixon addItemToBackpack "Chemlight_red";
 
-//AT Soldier 1
-clearAllItemsFromBackpack b_lopez;
-b_lopez addItemToBackpack "Titan_AP";
-b_lopez addItemToBackpack "Titan_AP";
-b_lopez addItemToBackpack "Titan_AP";
+//-----------------------------------
+//7 - Martinez - Sharpshooter
+b_martinez addGoggles "G_Shades_Blue";
 
-clearAllItemsFromBackpack b_hawkins;
-b_hawkins addItemToBackpack "Titan_AP";
-b_hawkins addItemToBackpack "Titan_AP";
-b_hawkins addItemToBackpack "Titan_AP";
-
-/*
-Notes:
-
-Add an option to 'go dark'?
-Add a mortar kit in one of the vehicles
-Make sure the vehicles that are there are out of gas
-Confirm that you can use High Command if you need to
-Figure out if you are going to have tons of enemies or not
-And if they are going to be dumb or smart or what
-Adjust their 'Behavior' to be 'Combat' and see if they shoot at you sooner
-
-Change the time
-Can the high command indicators be turned off?
-*/
-
-//Add/Remove stuff from the Ammo Bearer(s)
+//-----------------------------------
+//8 - Levine - Ammo bearer
 clearAllItemsFromBackpack b_levine;
 b_levine addItemToBackpack "30Rnd_65x39_caseless_mag";
 b_levine addItemToBackpack "30Rnd_65x39_caseless_mag";
@@ -120,9 +174,99 @@ b_levine addItemToBackpack "3Rnd_HE_Grenade_shell";
 b_levine addItemToBackpack "20Rnd_762x51_Mag";
 b_levine addItemToBackpack "20Rnd_762x51_Mag";
 
+//-----------------------------------
+//9 - Taylor - Rifleman
+b_taylor addGoggles "G_Bandanna_beast";
 
-//For the AT soldiers
+//-----------------------------------
+//10 - McKendrick - Engineer
+b_mckendrick addGoggles "G_Lowprofile";
+b_mckendrick addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+clearAllItemsFromBackpack b_mckendrick;
+removeBackpack b_mckendrick;
+b_mckendrick addBackpack "B_AssaultPack_blk";
+b_mckendrick addItemToBackpack "ToolKit";
 
+//-----------------------------------
+//11 - Dixon - Explosive Specialist
+b_dixon addGoggles "G_Lowprofile";
+b_dixon addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+clearAllItemsFromBackpack b_dixon;
+removeBackpack b_dixon;
+b_dixon addBackpack "B_AssaultPack_blk";
+b_dixon addItemToBackpack "ToolKit";
+//b_dixon addItemToBackpack "MineDetector";
+//b_dixon addItemToBackpack "APERSBoundingMine_Range_Mag";
+//b_dixon addItemToBackpack "APERSBoundingMine_Range_Mag";
+//b_dixon addItemToBackpack "APERSBoundingMine_Range_Mag";
+b_dixon addItemToBackpack "ClaymoreDirectionalMine_Remote_Mag";
+b_dixon addItemToBackpack "ClaymoreDirectionalMine_Remote_Mag";
+b_dixon addItemToBackpack "SLAMDirectionalMine_Wire_Mag";
+//b_dixon addItemToBackpack "SLAMDirectionalMine_Wire_Mag";
+//b_dixon addItemToBackpack "DemoCharge_Remote_Mag";
+
+//-----------------------------------
+//12 - Franklin - Asst Mortarman
+b_franklin addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+b_franklin addGoggles "G_Bandanna_shades";
+
+//-----------------------------------
+//13 - Givens - Mortarman
+b_givens addHeadgear "H_HelmetB_light_snakeskin"; //light snakeskin
+b_givens addGoggles "G_Bandanna_shades";
+
+//-----------------------------------
+//14 - Lopez - AT Soldier
+b_lopez addGoggles "G_Combat";
+clearAllItemsFromBackpack b_lopez;
+b_lopez addItemToBackpack "Titan_AP";
+b_lopez addItemToBackpack "Titan_AP";
+b_lopez addItemToBackpack "Titan_AP";
+
+//-----------------------------------
+//15 - Hawkins - AT Soldier
+b_hawkins addGoggles "G_Combat";
+clearAllItemsFromBackpack b_hawkins;
+b_hawkins addItemToBackpack "Titan_AP";
+b_hawkins addItemToBackpack "Titan_AP";
+b_hawkins addItemToBackpack "Titan_AP";
+
+
+//-----------------------------------
+//16 - Costa - Light Rifleman / Driver
+removeAllWeapons b_costa;
+removeAllItems b_costa;
+removeAllAssignedItems b_costa;
+removeUniform b_costa;
+removeVest b_costa;
+removeBackpack b_costa;
+removeHeadgear b_costa;
+removeGoggles b_costa;
+b_costa forceAddUniform "U_OG_Guerilla1_1";
+b_costa addItemToUniform "FirstAidKit";
+for "_i" from 1 to 2 do {b_costa addItemToUniform "30Rnd_556x45_Stanag";};
+b_costa addVest "V_TacVest_oli";
+for "_i" from 1 to 4 do {b_costa addItemToVest "30Rnd_556x45_Stanag";};
+for "_i" from 1 to 2 do {b_costa addItemToVest "Chemlight_yellow";};
+b_costa addItemToVest "HandGrenade";
+b_costa addHeadgear "H_MilCap_dgtl";
+b_costa addWeapon "arifle_TRG20_F";
+b_costa addPrimaryWeaponItem "acc_flashlight";
+b_costa addPrimaryWeaponItem "optic_Aco";
+b_costa addWeapon "Binocular";
+b_costa linkItem "ItemMap";
+b_costa linkItem "ItemCompass";
+b_costa linkItem "ItemWatch";
+b_costa linkItem "ItemRadio";
+
+
+//-----------------------------------
+//17 - Everett - Medic
+b_everett addItemToBackpack "Chemlight_red";
+b_everett addItemToBackpack "Chemlight_red";
+b_everett addItemToBackpack "Chemlight_red";
+b_everett addItemToBackpack "Chemlight_red";
+b_everett addItemToBackpack "Chemlight_red";
 
 
 /*
