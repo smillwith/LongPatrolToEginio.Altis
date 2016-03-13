@@ -115,7 +115,6 @@ class Mission
 		month=8;
 		day=15;
 		hour=16;
-		minute=0;
 		startFogDecay=0.013;
 		forecastFogDecay=0.013;
 	};
@@ -135,11 +134,12 @@ class Mission
 					id=0;
 					side="WEST";
 					vehicle="B_Soldier_SL_F";
+					player="PLAYER COMMANDER";
 					leader=1;
 					rank="LIEUTENANT";
 					skill=0.94953358;
 					text="b_armstrong";
-					init="this moveInCargo b_hunter1; assaultgroup = group this; this setIdentity ""cls_armstrong""; this linkItem ""ItemGPS"";";
+					init="assaultgroup = group this; this setIdentity ""cls_armstrong""; this linkItem ""ItemGPS"";";
 					syncId=0;
 					synchronizations[]={7,3,10};
 				};
@@ -153,7 +153,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.40000001;
 					text="b_bennett";
-					init="this moveInDriver b_hunter1; this setIdentity ""cls_bennett"";";
+					init="this setIdentity ""cls_bennett"";";
 				};
 				class Item2
 				{
@@ -177,7 +177,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.40000001;
 					text="b_larkin";
-					init="this moveInCargo [b_bobact1, 6]; this setIdentity ""cls_larkin"";";
+					init="this setIdentity ""cls_larkin"";";
 				};
 				class Item4
 				{
@@ -186,7 +186,6 @@ class Mission
 					id=4;
 					side="WEST";
 					vehicle="B_Sharpshooter_F";
-					player="PLAY CDG";
 					rank="CORPORAL";
 					skill=0.90492857;
 					text="b_martinez";
@@ -199,7 +198,6 @@ class Mission
 					id=5;
 					side="WEST";
 					vehicle="B_soldier_AR_F";
-					player="PLAY CDG";
 					rank="SERGEANT";
 					skill=0.44999999;
 					text="b_campbell";
@@ -215,7 +213,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.40000001;
 					text="b_levine";
-					init="this moveInCargo [b_bobact1, 12]; this setIdentity ""cls_levine"";";
+					init="this setIdentity ""cls_levine"";";
 					syncId=1;
 					synchronizations[]={1};
 				};
@@ -283,7 +281,7 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.56481558;
 					text="b_costa";
-					init="this moveInGunner b_hunter2; this setIdentity ""cls_costa"";";
+					init="this setIdentity ""cls_costa"";";
 				};
 				class Item12
 				{
@@ -295,10 +293,11 @@ class Mission
 					rank="CORPORAL";
 					skill=0.40000001;
 					text="b_franklin";
-					init="this moveInCargo [b_bobact1, 2]; this setIdentity ""cls_franklin"";";
+					init="this setIdentity ""cls_franklin"";";
 				};
 				class Item13
 				{
+					presence=0;
 					position[]={10765.836,13.86904,11205.968};
 					azimut=181.66299;
 					special="NONE";
@@ -317,7 +316,6 @@ class Mission
 					id=14;
 					side="WEST";
 					vehicle="B_support_Mort_F";
-					player="PLAY CDG";
 					rank="CORPORAL";
 					skill=0.40000001;
 					text="b_givens";
@@ -403,7 +401,8 @@ class Mission
 				};
 				class Item5
 				{
-					position[]={10655.184,46.674545,9530.4873};
+					position[]={10657.609,47.079754,9547.4697};
+					completitionRadius=200;
 					class Effects
 					{
 					};
@@ -480,7 +479,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={10811.52,16.214075,11157.403};
+					position[]={10781.16,14.662605,11155.641};
 					azimut=15.4322;
 					class args
 					{
@@ -2261,6 +2260,7 @@ class Mission
 				items=3;
 				class Item0
 				{
+					presence=0;
 					position[]={10733.903,15.427161,10062.093};
 					special="CARGO";
 					id=118;
@@ -2272,6 +2272,7 @@ class Mission
 				};
 				class Item1
 				{
+					presence=0;
 					position[]={10726.019,15.065766,10075.093};
 					id=119;
 					side="EAST";
@@ -2281,6 +2282,7 @@ class Mission
 				};
 				class Item2
 				{
+					presence=0;
 					position[]={10707.903,15.986213,10063.093};
 					special="CARGO";
 					id=120;
@@ -2389,6 +2391,7 @@ class Mission
 				items=4;
 				class Item0
 				{
+					presence=0;
 					position[]={11075.292,6.1621914,10855.167};
 					id=125;
 					side="EAST";
@@ -2399,6 +2402,7 @@ class Mission
 				};
 				class Item1
 				{
+					presence=0;
 					position[]={11080.292,5.8031616,10850.167};
 					id=126;
 					side="EAST";
@@ -2408,6 +2412,7 @@ class Mission
 				};
 				class Item2
 				{
+					presence=0;
 					position[]={11070.292,6.1535401,10850.167};
 					id=127;
 					side="EAST";
@@ -2416,6 +2421,7 @@ class Mission
 				};
 				class Item3
 				{
+					presence=0;
 					position[]={11085.292,5.1029115,10845.167};
 					id=128;
 					side="EAST";
@@ -2456,13 +2462,12 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={10781.331,14.529269,11212.943};
-					azimut=181.66299;
+					position[]={10797.107,15.749077,11148.309};
+					azimut=275.54791;
 					special="NONE";
 					id=129;
 					side="WEST";
 					vehicle="B_soldier_M_F";
-					player="PLAYER COMMANDER";
 					leader=1;
 					lock="UNLOCKED";
 					rank="CORPORAL";
@@ -3862,22 +3867,6 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={10708.954,240.28413,7593.7539};
-			a=500;
-			b=500;
-			activationBy="WEST";
-			interruptable=1;
-			age="UNKNOWN";
-			text="Music 4";
-			name="tMusic4";
-			expCond="false";
-			class Effects
-			{
-				track="LeadTrack01_F_EPC";
-			};
-		};
-		class Item2
-		{
 			position[]={10615.338,56.975445,8427.207};
 			a=1000;
 			b=1000;
@@ -3890,9 +3879,9 @@ class Mission
 			synchronizations[]={21};
 			syncId=25;
 		};
-		class Item3
+		class Item2
 		{
-			position[]={10820.604,16.950256,11161.951};
+			position[]={10781.225,14.583273,11161.514};
 			a=0;
 			b=0;
 			activationBy="LOGIC";
@@ -3901,6 +3890,7 @@ class Mission
 			timeoutMax=2;
 			interruptable=1;
 			age="UNKNOWN";
+			name="tCreateTask";
 			expCond="true";
 			class Effects
 			{
@@ -3908,7 +3898,7 @@ class Mission
 			synchronizations[]={3};
 			syncId=26;
 		};
-		class Item4
+		class Item3
 		{
 			position[]={10754.813,12.091391,11023.367};
 			activationBy="MEMBER";
@@ -3921,7 +3911,7 @@ class Mission
 			synchronizations[]={22};
 			syncId=27;
 		};
-		class Item5
+		class Item4
 		{
 			position[]={10773.033,5.4335384,10904.746};
 			a=30;
@@ -3936,6 +3926,24 @@ class Mission
 			};
 			synchronizations[]={23,24};
 			syncId=28;
+		};
+		class Item5
+		{
+			position[]={10573.852,6.8005567,11188.41};
+			a=0;
+			b=0;
+			activationBy="LOGIC";
+			timeoutMin=4;
+			timeoutMid=4;
+			timeoutMax=4;
+			interruptable=1;
+			age="UNKNOWN";
+			name="tMusic1";
+			expCond="true";
+			class Effects
+			{
+				track="EventTrack03a_F_EPB";
+			};
 		};
 	};
 };

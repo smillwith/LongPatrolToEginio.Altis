@@ -1,29 +1,4 @@
-﻿/*
-Notes:
-
-Add an option to 'go dark'?
-Make sure the vehicles that are there are out of gas
-Confirm that you can use High Command if you need to (or remove it)
-Figure out if you are going to have tons of enemies or not
-And if they are going to be dumb or smart or what
-Adjust their 'Behavior' to be 'Combat' and see if they shoot at you sooner
-Do we want to randomize emenies?
-Coop?
-Change the time
-Can the high command indicators be turned off?
-Can I reload ammo for the mortar?
-
-Coop Options
-
-Vehicles?
-Go Dark?
-Time?
-Go solo?
-
-*/
-
-
-//Begin ALL Units (all sides)
+﻿//Begin ALL Units (all sides)
 {
   _x unassignItem "NVGoggles";
   _x removeItem "NVGoggles";
@@ -299,7 +274,7 @@ if (!isDedicated) then {
 	//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
 	
   //Using this
-	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units group player);													// only own group - you cant help strange group members
+	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units assaultgroup);													// only own group - you cant help strange group members
 	//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units assaultgroup2);
 
 	//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach [p1,p2,p3,p4,p5];														// only some defined units
